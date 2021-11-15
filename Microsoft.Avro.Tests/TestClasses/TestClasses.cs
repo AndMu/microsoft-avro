@@ -1123,33 +1123,38 @@ namespace Microsoft.Hadoop.Avro.Tests
         [DataMember]
         public Utilities.RandomEnumeration PrimitiveEnum;
 
-        public override bool Equals(object obj)
-        {
-            return this.Equals(obj as ClassOfEnum);
-        }
+        [DataMember]
+        [NullableSchema]
+        public Utilities.RandomEnumeration? PrimitiveEnumEx;
 
-        public bool Equals(ClassOfEnum other)
-        {
-            if (other == null)
-            {
-                return false;
-            }
-            return
-            this.PrimitiveEnum == other.PrimitiveEnum;
-        }
-
-        public override int GetHashCode()
-        {
-            return
-            this.PrimitiveEnum.GetHashCode();
-        }
 
         public static ClassOfEnum Create(bool nullablesAreNulls)
         {
             return new ClassOfEnum
             {
                 PrimitiveEnum = Utilities.GetRandom<Utilities.RandomEnumeration>(nullablesAreNulls),
+                PrimitiveEnumEx = null
             };
+        }
+
+        public bool Equals(ClassOfEnum other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return PrimitiveEnum == other.PrimitiveEnum && PrimitiveEnumEx == other.PrimitiveEnumEx;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((ClassOfEnum) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine((int) PrimitiveEnum, PrimitiveEnumEx);
         }
     }
 

@@ -29,7 +29,7 @@ namespace Microsoft.Hadoop.Avro.Tests
     using ApacheAvro = global::Avro;
     using Codec = Microsoft.Hadoop.Avro.Container.Codec;
 
-    [Trait("Category","CheckIn")]
+    [Trait("Category", "CheckIn")]
     [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable", Justification = "Test class. Disposing in the tear off method.")]
     public sealed class AvroContainerTests : IDisposable
     {
@@ -72,6 +72,16 @@ namespace Microsoft.Hadoop.Avro.Tests
                 reader.MoveNext();
                 Assert.True(expected.SequenceEqual(reader.Current.Objects));
             }
+        }
+
+
+        [Fact]
+        public void Container_SerializeEnumObjects()
+        {
+            using var w = AvroContainer.CreateWriter<ClassOfEnum>(resultStream, Codec.Deflate);
+            using var writer = new SequentialWriter<ClassOfEnum>(w, 24);
+            var value = ClassOfEnum.Create(true);
+            writer.Write(ClassOfEnum.Create(true));
         }
 
         [Fact]
@@ -304,7 +314,7 @@ namespace Microsoft.Hadoop.Avro.Tests
 
                 memoryStream.Seek(0, SeekOrigin.Begin);
                 var reader = DataFileReader<GenericRecord>.OpenReader(memoryStream);
-                var actual = new List<GenericRecord>(reader);
+                var actual = new List<GenericRecord>(reader.NextEntries);
 
                 for (var k = 0; k < expected.Count; ++k)
                 {
@@ -336,7 +346,6 @@ namespace Microsoft.Hadoop.Avro.Tests
                 var datumWriter = new GenericWriter<GenericRecord>(schema);
                 var writer = DataFileWriter<GenericRecord>.OpenWriter(datumWriter, memoryStream);
 
-                writer.WriteHeader();
                 foreach (var obj in expected)
                 {
                     writer.Append(obj);
@@ -395,7 +404,7 @@ namespace Microsoft.Hadoop.Avro.Tests
                 memoryStream.Seek(0, SeekOrigin.Begin);
 
                 var reader = DataFileReader<GenericRecord>.OpenReader(memoryStream);
-                var actual = new List<GenericRecord>(reader);
+                var actual = new List<GenericRecord>(reader.NextEntries);
 
                 for (var k = 0; k < expected.Count; ++k)
                 {
@@ -453,7 +462,7 @@ namespace Microsoft.Hadoop.Avro.Tests
                 memoryStream.Seek(0, SeekOrigin.Begin);
 
                 var reader = DataFileReader<GenericRecord>.OpenReader(memoryStream);
-                var actual = new List<GenericRecord>(reader);
+                var actual = new List<GenericRecord>(reader.NextEntries);
 
                 Assert.Equal(expected.Count, actual.Count);
 
@@ -643,7 +652,7 @@ namespace Microsoft.Hadoop.Avro.Tests
                         this.resultStream.Seek(this.resultStream.Position - 1, SeekOrigin.Begin);
                         int markerLastByte = this.resultStream.ReadByte();
                         this.resultStream.Seek(this.resultStream.Position - 1, SeekOrigin.Begin);
-                        this.resultStream.WriteByte((byte) ((markerLastByte + 10)%255));
+                        this.resultStream.WriteByte((byte)((markerLastByte + 10) % 255));
                     }
                     writer.Dispose();
 

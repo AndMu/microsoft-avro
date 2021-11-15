@@ -214,7 +214,8 @@ namespace Microsoft.Hadoop.Avro.Tests
                 return (T)Activator.CreateInstance(typeof(Uri), new object[] { "http://whatever" + GetRandom<string>(nullsAllowed) });
             }
 
-            if (type.GetTypeInfo().IsClass)
+            if (type != typeof(string) &&
+                type.GetTypeInfo().IsClass)
             {
                 var createMethod = type.GetMethod("Create", BindingFlags.Static | BindingFlags.Public);
                 if (createMethod != null)
@@ -227,6 +228,7 @@ namespace Microsoft.Hadoop.Avro.Tests
                             return default(T);
                         }
                     }
+
                     return (T)createMethod.Invoke(null, new object[] { nullsAllowed });
                 }
             }
@@ -236,6 +238,7 @@ namespace Microsoft.Hadoop.Avro.Tests
             {
                 throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "Do not know how to generate a random value of type '{0}'", type));
             }
+
             return ((Func<T>)result)();
         }
 

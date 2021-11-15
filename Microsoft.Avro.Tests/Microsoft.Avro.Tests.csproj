@@ -1,11 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <AssemblyName>Microsoft.Avro.Tests</AssemblyName>
-	  <TargetFrameworks>netcoreapp2.0;net451</TargetFrameworks>
+	  <TargetFrameworks>net6.0</TargetFrameworks>
     <Description>Tests Microsoft Avro libraries</Description>
     <PackageTags>Avro</PackageTags>
   </PropertyGroup>
-  <Import Project="..\build.props" />
   <ItemGroup>
     <Compile Remove="CodeGenTests\CodeGenerationTests.cs" />
     <Compile Remove="CodeGenTests\CodeGenerationVerificationSteps.cs" />
@@ -13,31 +12,20 @@
     <Compile Remove="SchemaTests\ReflectionSchemaBuilderTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0" />
-    <PackageReference Include="xunit" Version="2.2.0" />
-    <PackageReference Include="xunit.core" Version="2.2.0" />
-    <PackageReference Include="xunit.extensibility.core" Version="2.2.0" />
-    <PackageReference Include="xunit.extensibility.execution" Version="2.2.0" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
-  </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp2.0'">
-    <PackageReference Include="SpecFlow.NetCore" Version="1.0.0-*" />
-  </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'net451'">
-      <PackageReference Include="SpecFlow" Version="2.1.0" />
-      <Reference Include="System" />
-      <Reference Include="Microsoft.CSharp" />
+    <PackageReference Include="Apache.Avro" Version="1.11.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
+    <PackageReference Include="protobuf-net" Version="3.0.101" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.core" Version="2.4.1" />
+    <PackageReference Include="xunit.extensibility.core" Version="2.4.1" />
+    <PackageReference Include="xunit.extensibility.execution" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Avro">
-      <HintPath>..\external\avro\Avro.dll</HintPath>
-    </Reference>
-    <Reference Include="log4net">
-      <HintPath>..\external\avro\log4net.dll</HintPath>
-    </Reference>
-    <Reference Include="protobuf-net">
-      <HintPath>..\external\protobuf.net\r602\net30\protobuf-net.dll</HintPath>
-    </Reference>
+    <PackageReference Include="SpecFlow.NetCore" Version="1.3.5" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Microsoft.Avro.Core\Microsoft.Avro.Core.csproj" />

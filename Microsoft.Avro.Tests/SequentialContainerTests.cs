@@ -216,7 +216,7 @@ namespace Microsoft.Hadoop.Avro.Tests
 
             this.resultStream.Seek(0, SeekOrigin.Begin);
             var reader = DataFileReader<GenericRecord>.OpenReader(this.resultStream);
-            var actual = new List<GenericRecord>(reader);
+            var actual = new List<GenericRecord>(reader.NextEntries);
 
             for (var i = 0; i < expected.Count; ++i)
             {
@@ -245,11 +245,11 @@ namespace Microsoft.Hadoop.Avro.Tests
             var datumWriter = new GenericWriter<GenericRecord>(schema);
             var writer = DataFileWriter<GenericRecord>.OpenWriter(datumWriter, this.resultStream);
 
-            writer.WriteHeader();
             foreach (var obj in expected)
             {
                 writer.Append(obj);
             }
+
             writer.Flush();
 
             this.resultStream.Seek(0, SeekOrigin.Begin);
@@ -285,7 +285,7 @@ namespace Microsoft.Hadoop.Avro.Tests
             this.resultStream.Seek(0, SeekOrigin.Begin);
 
             var reader = DataFileReader<GenericRecord>.OpenReader(this.resultStream);
-            var actual = new List<GenericRecord>(reader);
+            var actual = new List<GenericRecord>(reader.NextEntries);
 
             for (var i = 0; i < expected.Count; ++i)
             {
@@ -324,7 +324,7 @@ namespace Microsoft.Hadoop.Avro.Tests
             this.resultStream.Seek(0, SeekOrigin.Begin);
 
             var reader = DataFileReader<GenericRecord>.OpenReader(this.resultStream);
-            var actual = new List<GenericRecord>(reader);
+            var actual = new List<GenericRecord>(reader.NextEntries);
 
             Assert.Equal(expected.Count, actual.Count);
 
