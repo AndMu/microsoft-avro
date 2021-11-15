@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<AssemblyName>Microsoft.Avro.Core</AssemblyName>
-		<PackageId>Microsoft.Avro.Standard</PackageId>
-		<Description>Microsoft Avro library for .NET Standard 2.0</Description>
-		<PackageTags>Avro  Serialization Json Binary Schema</PackageTags>
+		<PackageId>Wikiled.Avro.Standard</PackageId>
+		<Description>Microsoft Avro library port for .NET Standard 2.0</Description>
+		<PackageTags>Avro Serialization Json Binary Schema</PackageTags>
 		<TargetFrameworks>netstandard2.0</TargetFrameworks>
 		<Authors>Wikiled</Authors>
 		<Description>Microsoft Avro library</Description>
