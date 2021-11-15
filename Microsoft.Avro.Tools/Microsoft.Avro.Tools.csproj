@@ -1,12 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <AssemblyName>Microsoft.Avro.Tools</AssemblyName>
-    <OutputType>Exe</OutputType>
-    <Description>Microsoft Avro Tools</Description>
-    <PackageTags>Avro Serialization Json Binary Schema</PackageTags>
-    <TargetFrameworks>net6.0</TargetFrameworks>
-  </PropertyGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Microsoft.Avro.Core\Microsoft.Avro.Core.csproj" />
-  </ItemGroup>
+	<PropertyGroup>
+		<AssemblyName>Microsoft.Avro.Tools</AssemblyName>
+		<OutputType>Exe</OutputType>
+		<Description>Microsoft Avro Tools</Description>
+		<PackageTags>Avro Serialization Json Binary Schema</PackageTags>
+		<TargetFrameworks>net6.0</TargetFrameworks>
+		<IsPackable>false</IsPackable>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Microsoft.Avro.Core\Microsoft.Avro.Core.csproj" />
+	</ItemGroup>
 </Project>

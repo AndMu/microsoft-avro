@@ -1,13 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <AssemblyName>AvroTestApp</AssemblyName>
-    <OutputType>Exe</OutputType>
-    <Description>Test Application for Microsoft Avro libraries</Description>
-    <PackageTags>Avro</PackageTags>
-    <TargetFrameworks>net6.0</TargetFrameworks>
-  </PropertyGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Microsoft.Avro.Core\Microsoft.Avro.Core.csproj" />
-  </ItemGroup>
+	<PropertyGroup>
+		<AssemblyName>AvroTestApp</AssemblyName>
+		<OutputType>Exe</OutputType>
+		<Description>Test Application for Microsoft Avro libraries</Description>
+		<PackageTags>Avro</PackageTags>
+		<TargetFrameworks>net6.0</TargetFrameworks>
+		<IsPackable>false</IsPackable>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Microsoft.Avro.Core\Microsoft.Avro.Core.csproj" />
+	</ItemGroup>
 
 </Project>

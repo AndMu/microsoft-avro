@@ -11,6 +11,7 @@
 		<ProjectUrl>https://github.com/AndMu/microsoft-avro</ProjectUrl>
 		<tags>avro, standard</tags>
 		<LangVersion>latest</LangVersion>
+		<IsPackable>true</IsPackable>
 	</PropertyGroup>
 
 	<ItemGroup>
